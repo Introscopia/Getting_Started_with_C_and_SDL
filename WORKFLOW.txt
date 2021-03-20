@@ -31,7 +31,7 @@ TO START A NEW PROJECT
 * If you're using any SDL libraries you need to go and copy the .DLLs to your project folder, they live in:
 C:\SDL\SDL2_[LIBRARY]-[VERSION]\i686-w64-mingw32\bin
 get all of them! For image, for example, you need SDL2_image.dll, zlib1.dll AND the specific ones for the image formats you'll be using (libjpeg-9.dll, libpng16-16.dll, etc...)
-All of this also goes for the base SDL dll, in case you lose the one in the template, of when you update SDL.
+All of this also goes for the base SDL dll, in case you lose the one in the template, or when you update SDL.
 
 
 *IF YOU'RE USING SUBLIME
