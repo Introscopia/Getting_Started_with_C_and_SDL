@@ -1,0 +1,51 @@
+THE WORKFLOW
+
+* write code on a text editor, I use Sublime, personally.
+* to compile: click #MAKE.bat, it opens the terminal and puts in the compilation command for you.
+* the terminal stays open, don't close it! Run your program from this same terminal window 
+	( type example.exe, hit enter, TAB auto-completes based on what's in the folder.)
+	>Why should I run the program from the terminal if I can just click the .exe in the folder?
+	- Because then you retain the log of everything you puts() or printf() from your code after you close it, or when it invariably crashes.
+	-ALSO, after you run the the program for the first time, and after you compile for the second time
+	(by typing in "mingw32-make quick", or just copy-pasting it from when the batch file put it in for you) you can use UP/DOWN ARROWS to go back and repeat these earlier commands, so compiling and running become 2-keystroke operations. Not counting alt-tabbing from the text editor...
+	This might seem like obsessing over tiny details, but these little efficiencies add up over years of devving!
+
+>What's the "quick" after mingw32-make??
+I have 4 compiler flags sets in my makefiles:
+ -release: suppresses all warnings, gets rid of the console window.
+ -quick: suppresses all warnings
+ -debug: my personal selection of compiler warnings (not that helpful)
+ -max: all warnings enabled (awful)
+
+
+
+TO START A NEW PROJECT
+
+* copy the template, rename the folder.
+
+* open the makefile. It doesn't have an extention, don't add one, just open it in the text editor.
+* every new code file (.c) needs to go in the OBJS list, no commas, just spaces
+* SDL libraries need to be included and liked, SDL2_image and SDL2_ttf examples are in there, commented out
+* change OBJ_NAME to be whatever you want. That'll be the name of the .exe file.
+
+* If you're using any SDL libraries you need to go and copy the .DLLs to your project folder, they live in:
+C:\SDL\SDL2_[LIBRARY]-[VERSION]\i686-w64-mingw32\bin
+get all of them! For image, for example, you need SDL2_image.dll, zlib1.dll AND the specific ones for the image formats you'll be using (libjpeg-9.dll, libpng16-16.dll, etc...)
+All of this also goes for the base SDL dll, in case you lose the one in the template, of when you update SDL.
+
+
+*IF YOU'RE USING SUBLIME
+learn CTRL+D and SHIFT+RIGHT-CLICK&DRAG.
+
+
+WHERE DO I LEARN...
+> C
+	-The C Programming Language, 2E, AKA "K&R"
+	-Learning C the hard way
+> The C standard Libraries
+	-https://www.cplusplus.com/reference/clibrary/
+> SDL
+	-https://wiki.libsdl.org/FrontPage
+> SDL libraries
+	the header files are pretty well commented
+	-( image lib, for example is at: C:\SDL\SDL2_image-2.0.5\i686-w64-mingw32\include\SDL2\SDL_image.h )

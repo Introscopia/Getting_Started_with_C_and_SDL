@@ -1,0 +1,1 @@
+gcc hi.c -o hi
