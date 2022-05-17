@@ -28,15 +28,24 @@
 #define TWELFTH_PI  (double) 0.261799387799149436538553615273291907016430783281258818414
 #define ONE_OVER_PI (double) 0.318309886183790671537767526745028724068919291480912897495
 
-//const SDL_Color black = {0, 0, 0, 255};
-//const SDL_Color white = {255, 255, 255, 255};
-
-Uint32 rmask, gmask, bmask, amask;
-
-typedef char bool;
 
 
-//#define remove_element( ptr, len, ind, siz ) for( int H = ind; H < *len; ++H )
+typedef int bool;
+
+
+
+#if SDL_BYTEORDER == SDL_LIL_ENDIAN
+   #define rmask 0xff000000
+   #define gmask 0x00ff0000
+   #define bmask 0x0000ff00
+   #define amask 0x000000ff
+#else
+   #define rmask 0x000000ff
+   #define gmask 0x0000ff00
+   #define bmask 0x00ff0000
+   #define amask 0xff000000
+#endif
+
 
 
 extern DECLSPEC int SDLCALL SDL_SetRenderDraw_SDL_Color( SDL_Renderer *renderer, SDL_Color *C );
@@ -69,11 +78,6 @@ double degrees( double radians );
 double radians( double degrees );
 
 double rectify_angle( double a );
-
-//https://gist.github.com/Gumichan01/332c26f6197a432db91cc4327fcabb1c
-int SDL_RenderDrawCircle(SDL_Renderer * renderer, int x, int y, int radius);
-//https://gist.github.com/Gumichan01/332c26f6197a432db91cc4327fcabb1c
-int SDL_RenderFillCircle(SDL_Renderer * renderer, int x, int y, int radius);
 
 // String split
 void strspl( char *string, const char *delimiters, char ***list, int *size );
@@ -114,8 +118,6 @@ bool punctuation_or_symbol( char c );
 bool ascii_text( char c );
 char shifted_keys( char c );
 
-typedef struct {
-    int i, j;
-} index2d;
+void SDL_framerateDelay( int frame_period );//clock_t *frame_timer, 
 
 #endif

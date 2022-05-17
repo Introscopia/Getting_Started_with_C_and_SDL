@@ -56,11 +56,13 @@ int main(int argc, char *argv[]){
     const SDL_Color white = {255, 255, 255, 255};
     Uint32 rmask, gmask, bmask, amask;
     #if SDL_BYTEORDER == SDL_BIG_ENDIAN
+        //puts("SDL_BIG_ENDIAN");
         rmask = 0xff000000;
         gmask = 0x00ff0000;
         bmask = 0x0000ff00;
         amask = 0x000000ff;
     #else
+        //puts("SDL_LIL_ENDIAN");
         rmask = 0x000000ff;
         gmask = 0x0000ff00;
         bmask = 0x00ff0000;
@@ -86,10 +88,10 @@ int main(int argc, char *argv[]){
                 case SDL_QUIT:
                     loop = 0;
                     break;
-                case SDL_KEYDOWN:
+                case SDL_KEYDOWN://keyPressed
                     //if( event.key.keysym.sym == 'w' || event.key.keysym.sym == SDLK_UP ){   
                     break;
-                case SDL_KEYUP:
+                case SDL_KEYUP://keyReleased
                          
                     break;
                 case SDL_MOUSEMOTION:

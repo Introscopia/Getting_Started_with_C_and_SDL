@@ -1,20 +1,11 @@
 #include "basics.h"
-//#include <string.h>
-//#include <stdint.h>
+#include "primitives.h"
 
-#include <SDL.h>
-//#include "SDL2_gfx/SDL2_gfxPrimitives.h"
-#include "SDL2_gfx/SDL2_framerate.h"
 
 #ifdef WIN32
 #define _WIN32_WINNT 0x0500
 #include <windows.h>
 #endif
-
-
-Uint32 time_passed = 0;
-
-
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~O~~~~~~~~~~| M A I N |~~~~~~~~~~~O~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -27,29 +18,22 @@ int main(int argc, char *argv[]){
     int height = 400;
     int cx, cy;
     int loop = 1;
-    int zoomI = 0;
-    double zoom = 1;
-    double tx = 0, ty = 0;
-    int mouseX, mouseY, pmouseX, pmouseY;
 
-    Uint32 then, now, frames;
-    FPSmanager fpsm;
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't initialize SDL: %s", SDL_GetError());
         return 3;
     }
-    if (SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_RESIZABLE, &window, &renderer)) {
+    if (SDL_CreateWindowAndRenderer(width, height, 0, &window, &renderer)) {
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create window and renderer: %s", SDL_GetError());
         return 3;
     }
-    //SDL_MaximizeWindow( window );
-    SDL_GetWindowSize( window, &width, &height );
+
     cx = width / 2;
     cy = height / 2;
 
     // prime the random number generator
-    srand (time(NULL)); 
+    srand (time(NULL));
     
 
     // paddle height and width, and their halves
@@ -83,12 +67,12 @@ int main(int argc, char *argv[]){
     float vbx = vel * cos(a);
     float vby = vel * sin(a);
 
-    //control variables. they will store the it's respective control key (up or down for the given player)
+    //control variables. they will store the state of each control key (up or down for the given player)
     int p1u = 0, p1d = 0, p2u = 0, p2d = 0;
     
+    //our desired frame period
+    int frame_period = lrint( 1000 / 60.0 );
 
-    SDL_initFramerate(&fpsm);
-    SDL_setFramerate(&fpsm, 60);
     puts("<<Entering Loop>>");
     while ( loop ) { //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> L O O P <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
         
@@ -141,12 +125,12 @@ int main(int argc, char *argv[]){
             bx = P2_rect.x -br;
         }
         
-        int reset_ball = 0;
+        bool reset_ball = 0;
         if( bx < 0 ){
           ++p2s;
           reset_ball = 1;
         }
-        if( bx > 600 ){
+        if( bx > width ){
           ++p1s;
           reset_ball = 1;
         }
@@ -165,9 +149,6 @@ int main(int argc, char *argv[]){
             vby = vel * sin(a);
         }
 
-
-
-
         // clear previous frame
         SDL_SetRenderDrawColor( renderer, 0, 0, 0, 255);
         SDL_RenderClear( renderer );
@@ -180,13 +161,13 @@ int main(int argc, char *argv[]){
         //Center line,
         SDL_RenderDrawLine( renderer, cx, 0, cx, height );
         //ball.
-        SDL_RenderFillCircle( renderer, bx, by, br );
+        gp_fill_16circle( renderer, bx, by, br );
 
         // throw things up onscreen
         SDL_RenderPresent(renderer);
 
-        // maintain constant framerate
-        time_passed = SDL_framerateDelay(&fpsm);
+        // try to maintain constant framerate
+        SDL_framerateDelay( frame_period );
 
     }//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> / L O O P <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 

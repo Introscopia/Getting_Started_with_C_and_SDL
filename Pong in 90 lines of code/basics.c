@@ -91,96 +91,6 @@ double rectify_angle( double a ){
 	}
 }
 
-//https://gist.github.com/Gumichan01/332c26f6197a432db91cc4327fcabb1c
-int SDL_RenderDrawCircle(SDL_Renderer * renderer, int x, int y, int radius){
-
-    int offsetx, offsety, d;
-    int status;
-
-    //CHECK_RENDERER_MAGIC(renderer, -1);
-
-    offsetx = 0;
-    offsety = radius;
-    d = radius -1;
-    status = 0;
-
-    while (offsety >= offsetx) {
-        status |= SDL_RenderDrawPoint(renderer, x + offsetx, y + offsety);
-        status |= SDL_RenderDrawPoint(renderer, x + offsety, y + offsetx);
-        status |= SDL_RenderDrawPoint(renderer, x - offsetx, y + offsety);
-        status |= SDL_RenderDrawPoint(renderer, x - offsety, y + offsetx);
-        status |= SDL_RenderDrawPoint(renderer, x + offsetx, y - offsety);
-        status |= SDL_RenderDrawPoint(renderer, x + offsety, y - offsetx);
-        status |= SDL_RenderDrawPoint(renderer, x - offsetx, y - offsety);
-        status |= SDL_RenderDrawPoint(renderer, x - offsety, y - offsetx);
-
-        if (status < 0) {
-            status = -1;
-            break;
-        }
-
-        if (d >= 2*offsetx) {
-            d -= 2*offsetx + 1;
-            offsetx +=1;
-        }
-        else if (d < 2 * (radius - offsety)) {
-            d += 2 * offsety - 1;
-            offsety -= 1;
-        }
-        else {
-            d += 2 * (offsety - offsetx - 1);
-            offsety -= 1;
-            offsetx += 1;
-        }
-    }
-
-    return status;
-}
-//https://gist.github.com/Gumichan01/332c26f6197a432db91cc4327fcabb1c
-int SDL_RenderFillCircle(SDL_Renderer * renderer, int x, int y, int radius){
-    int offsetx, offsety, d;
-    int status;
-
-    //CHECK_RENDERER_MAGIC(renderer, -1);
-
-    offsetx = 0;
-    offsety = radius;
-    d = radius -1;
-    status = 0;
-
-    while (offsety >= offsetx) {
-
-        status |= SDL_RenderDrawLine(renderer, x - offsety, y + offsetx,
-                                     x + offsety, y + offsetx);
-        status |= SDL_RenderDrawLine(renderer, x - offsetx, y + offsety,
-                                     x + offsetx, y + offsety);
-        status |= SDL_RenderDrawLine(renderer, x - offsetx, y - offsety,
-                                     x + offsetx, y - offsety);
-        status |= SDL_RenderDrawLine(renderer, x - offsety, y - offsetx,
-                                     x + offsety, y - offsetx);
-
-        if (status < 0) {
-            status = -1;
-            break;
-        }
-
-        if (d >= 2*offsetx) {
-            d -= 2*offsetx + 1;
-            offsetx +=1;
-        }
-        else if (d < 2 * (radius - offsety)) {
-            d += 2 * offsety - 1;
-            offsety -= 1;
-        }
-        else {
-            d += 2 * (offsety - offsetx - 1);
-            offsety -= 1;
-            offsetx += 1;
-        }
-    }
-
-    return status;
-}
 
 
 void strspl( char *string, const char *delimiters, char ***list, int *size ){
@@ -507,4 +417,15 @@ char shifted_keys( char c ){
 	//            ! "#$%& '()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
 	char S [] = " !\"#$%&\"()*+<_>?)!@#$%^&*(::<+>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ{|}^_`ABCDEFGHIJKLMNOPQRSTUVWXYZ{|}~";
 	return S[ c - 32 ];
+}
+
+
+void SDL_framerateDelay( int frame_period ){
+    //we assume CLOCKS_PER_SEC is 1000, cause it always is...
+    static clock_t then = 0;
+    clock_t now = clock();
+    int delay = frame_period - ( now - then );
+    //printf("%d - (%d - %d) = %d\n", frame_period, now, then, delay );
+    if( delay > 0 ) SDL_Delay( delay );
+    then = clock();
 }
