@@ -35,15 +35,14 @@ All of this also goes for the base SDL dll, in case you lose the one in the temp
 
 
 *IF YOU'RE USING SUBLIME
-learn CTRL+D and SHIFT+RIGHT-CLICK&DRAG.
+learn CTRL+D and MIDDLE-CLICK-&-DRAG.
 
 
 WHERE DO I LEARN...
 > C
 	-The C Programming Language, 2E, AKA "K&R"
-	-Learning C the hard way
 > The C standard Libraries
-	-https://www.cplusplus.com/reference/clibrary/
+	-https://legacy.cplusplus.com/reference/clibrary/
 > SDL
 	-https://wiki.libsdl.org/FrontPage
 > SDL libraries

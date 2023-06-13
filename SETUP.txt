@@ -1,6 +1,8 @@
 Quick guide for setting up MinGW and SDL for C development on windows.
 
 STEP 1 - Download MinGW
+https://osdn.net/projects/mingw/
+this is the most recent version (as of 2023, since 2017):
 https://osdn.net/projects/mingw/downloads/68260/mingw-get-setup.exe/
 (download will start automatically)
 
@@ -19,7 +21,7 @@ STEP 3
 - open up "This PC" on windows explorer.
 - right-click anywhere on the window (like, empty space, the background, not an icon or link or anything)
 - click "Properties"
-- if the previous 3 steps did not make sense to you, somehow, find your way over to the "Control Panel\System and Security\System" screen.
+- if the previous 3 steps did not make sense to you, somehow, find your way over to the "Control Panel\System and Security\System" screen. or just look for "System Variables" in the taskbar search box.
 - On the sidebar on the left, click "Advanced system settings"
 - click the button that says "Environment Variables"
 - on the lower list, "System variables", find a variable called "Path", select it and click "Edit..."
@@ -27,7 +29,7 @@ STEP 3
 - Done! Now we can compile from the command line.
 
 STEP 4 - SDL!
-- go to https://www.libsdl.org/download-2.0.php
+- go to https://github.com/libsdl-org/SDL/releases
 - Download the Development Library, for MinGW
 ( link should look like this: SDL2-devel-2.0.14-mingw.tar.gz (MinGW 32/64-bit) )
 -now go to https://www.libsdl.org/projects/
