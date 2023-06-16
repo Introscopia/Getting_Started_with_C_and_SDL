@@ -1,10 +1,6 @@
 CC = gcc
 
-OBJS = main.c SDL2_gfx/SDL2_framerate.c 
-#  SDL2_gfx/SDL2_gfxPrimitives.c SDL2_gfx/SDL2_rotozoom.c 
-
-# -w (suppresses all warnings)
-# -Wl,-subsystem (windows gets rid of the console window)
+OBJS = main.c
 
 COMPILER_FLAGS_RELEASE = -w -Wl,-subsystem,windows
 COMPILER_FLAGS_QUICK = -w
@@ -18,11 +14,11 @@ else
 endif
 
 ifeq ($(DETECTED_OS),Windows)
-	INCLUDE_PATHS = -IC:/SDL/SDL2-2.0.14/i686-w64-mingw32/include/SDL2
+	INCLUDE_PATHS = -IC:/SDL/SDL2-2.26.4/i686-w64-mingw32/include/SDL2
 #	INCLUDE_PATHS += -IC:/SDL/SDL2_image-2.0.5/i686-w64-mingw32/include/SDL2
 #	INCLUDE_PATHS += -IC:/SDL/SDL2_ttf-2.0.15/i686-w64-mingw32/include/SDL2
 
-	LIBRARY_PATHS = -LC:/SDL/SDL2-2.0.14/i686-w64-mingw32/lib
+	LIBRARY_PATHS = -LC:/SDL/SDL2-2.26.4/i686-w64-mingw32/lib
 #	LIBRARY_PATHS += -LC:/SDL/SDL2_image-2.0.5/i686-w64-mingw32/lib
 #	LIBRARY_PATHS += -LC:/SDL/SDL2_ttf-2.0.15/i686-w64-mingw32/lib
 

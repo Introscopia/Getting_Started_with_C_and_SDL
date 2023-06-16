@@ -1,13 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-//#include <time.h>
-//#include <math.h>
-//#include <string.h>
-//#include <stdint.h>
+#include <time.h>
+#include <math.h>
+#include <string.h>
 
 #include <SDL.h>
-//#include "SDL2_gfx/SDL2_gfxPrimitives.h"
-#include "SDL2_gfx/SDL2_framerate.h"
 
 #ifdef WIN32
 #define _WIN32_WINNT 0x0500
@@ -15,26 +12,17 @@
 #endif
 
 
-Uint32 time_passed = 0;
-
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~O~~~~~~~~~~| M A I N |~~~~~~~~~~~O~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 int main(int argc, char *argv[]){
 
     SDL_Window *window;
     SDL_Renderer *renderer;
-    SDL_Event event;
+    
     int width = 640;
     int height = 480;
-    int cx, cy;
     int loop = 1;
-    int zoomI = 0;
-    double zoom = 1;
-    double tx = 0, ty = 0;
     int mouseX, mouseY, pmouseX, pmouseY;
-
-    Uint32 then, now, frames;
-    FPSmanager fpsm;
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't initialize SDL: %s", SDL_GetError());
@@ -44,30 +32,10 @@ int main(int argc, char *argv[]){
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create window and renderer: %s", SDL_GetError());
         return 3;
     }
-    //SDL_MaximizeWindow( window );
     SDL_GetWindowSize( window, &width, &height );
-    cx = width / 2;
-    cy = height / 2;
+
 
     //srand (time(NULL));// prime the random number generator
-
-
-    const SDL_Color black = {0, 0, 0, 255};
-    const SDL_Color white = {255, 255, 255, 255};
-    Uint32 rmask, gmask, bmask, amask;
-    #if SDL_BYTEORDER == SDL_BIG_ENDIAN
-        //puts("SDL_BIG_ENDIAN");
-        rmask = 0xff000000;
-        gmask = 0x00ff0000;
-        bmask = 0x0000ff00;
-        amask = 0x000000ff;
-    #else
-        //puts("SDL_LIL_ENDIAN");
-        rmask = 0x000000ff;
-        gmask = 0x0000ff00;
-        bmask = 0x00ff0000;
-        amask = 0xff000000;
-    #endif
 
 
     /*
@@ -83,6 +51,7 @@ int main(int argc, char *argv[]){
     puts("<<Entering Loop>>");
     while ( loop ) { //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> L O O P <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
         
+        SDL_Event event;
         while( SDL_PollEvent(&event) ){
             switch (event.type) {
                 case SDL_QUIT:
@@ -127,9 +96,6 @@ int main(int argc, char *argv[]){
 
         // throw things up onscreen
         SDL_RenderPresent(renderer);
-
-        // maintain constant framerate
-        time_passed = SDL_framerateDelay(&fpsm);
 
     }//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> / L O O P <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
