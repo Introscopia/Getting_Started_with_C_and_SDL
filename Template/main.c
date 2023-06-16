@@ -46,8 +46,6 @@ int main(int argc, char *argv[]){
 
     */
     
-    SDL_initFramerate(&fpsm);
-    SDL_setFramerate(&fpsm, 60);
     puts("<<Entering Loop>>");
     while ( loop ) { //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> L O O P <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
         
