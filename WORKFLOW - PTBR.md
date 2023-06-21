@@ -16,22 +16,22 @@ Pois é, por isso que eu já fiz tudo pra você!
 Nos meus exemplos você vai encontrar:
 - Makefiles prontas em bem simples pra você adaptar para os seus projetos
 - Pasta Template de projeto já com todos os arquivos dentro
-- um batch script "#MAKE.bat" que abre o cmd na pasta do projeto e já executa o comando pra compilar.
-	"Mas porque ele faz o comando `mingw32-make quick`", o que é esse "quick"?
-	O quick é o nome da "receita", ou build recipe. Nas minhas makefiles eu tenho 4:
+- um batch script "#MAKE.bat" que você pode clicar para abrir o cmd na pasta do projeto e já executar o comando de compilar.
+	Ele executa o comando `mingw32-make quick`", "quick" é o nome da "receita", ou build recipe. Nas minhas makefiles eu tenho 4:
+
 		- release: esconde a janela do terminal que, por padrão, abre junto com todos os programas.
 		- quick: omite todos os avisos.
 		- debug: minha seleção de tipos de aviso mais úteis.
 		- max: Todos os avisos (extremamente chato)
 
 ONDE EU APRENDO...
-> C
+- C
 	-The C Programming Language, 2E, AKA "K&R"
-> AS Bibliotecas padrão do C, "C standard Libraries"
+- AS Bibliotecas padrão do C, "C standard Libraries"
 	-https://legacy.cplusplus.com/reference/clibrary/
-> SDL
+- SDL
 	-https://wiki.libsdl.org/FrontPage
-> Módulos SDL
+- Módulos SDL
 	Os próprios headers (arquivos .h) das libs são bem comentados:
 		A da image lib, por exemplo se encontra em:
 		`C:\SDL\SDL2_image-2.6.3\i686-w64-mingw32\include\SDL2\SDL_image.h`

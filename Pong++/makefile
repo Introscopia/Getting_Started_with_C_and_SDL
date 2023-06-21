@@ -28,7 +28,7 @@ else
 	LINKER_FLAGS = -lm -lSDL2 -lSDL2_ttf -lSDL2_image 
 endif
 
-OBJ_NAME = Template
+OBJ_NAME = Pong
 
 release : $(OBJS)
 	$(CC) $(OBJS) $(INCLUDE_PATHS) $(LIBRARY_PATHS) $(COMPILER_FLAGS_RELEASE) $(LINKER_FLAGS) -o $(OBJ_NAME)

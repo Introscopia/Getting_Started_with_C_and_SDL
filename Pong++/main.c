@@ -1,10 +1,11 @@
+// Incluindo algumas bibliotecas padrão.
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
 #include <string.h>
 #include <stdint.h>
-
+// Incluindo o SDL
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <SDL_Image.h>
@@ -13,6 +14,12 @@
 #define _WIN32_WINNT 0x0500
 #include <windows.h>
 #endif
+
+
+
+
+
+//Aqui antes do main(), declaramos alguns valores e funcoes que vamos usar no programa.
 
 typedef int32_t bool;
 
@@ -56,12 +63,17 @@ void render_num_text( SDL_Renderer *R, int num, SDL_Texture **T, SDL_Rect *dst, 
 }
 
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~O~~~~~~~~~~| M A I N |~~~~~~~~~~~O~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+//Inicio do programa
 int main(int argc, char *argv[]){
 
+    //Declarando Janela e Renderizador do SDL
     SDL_Window *window;
     SDL_Renderer *renderer;
     
+    //Algumas Variaveis básicas
     int width = 640;
     int height = 480;
     int loop = 1;
@@ -70,35 +82,39 @@ int main(int argc, char *argv[]){
     cx = width / 2;
     cy = height / 2;
 
+    //Inicializando o sistema de video do SDL
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't initialize SDL: %s", SDL_GetError());
         return 3;
     }
+    //Inicializando nossa Janela e Renderizador
     if (SDL_CreateWindowAndRenderer(width, height, 0, &window, &renderer)) {
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create window and renderer: %s", SDL_GetError());
         return 3;
     }
-    //SDL_GetWindowSize( window, &width, &height );
 
     //inicializando a biblioteca de imagem
     IMG_Init( IMG_INIT_PNG );
-    //carregar a imagem
+    //carregar a imagem:
     SDL_Texture *sprites = IMG_LoadTexture( renderer, "sprites.png");
     SDL_Rect P1_paddle_src = (SDL_Rect){0, 0, 16, 88};
     SDL_Rect P2_paddle_src = (SDL_Rect){48, 0, 16, 88};
     SDL_Rect ball1_src = (SDL_Rect){17, 1, 13, 13};
     SDL_Rect ball2_src = (SDL_Rect){17, 17, 13, 13};
 
+    // Inicializacao do gerador de numeros aleatorios
+    srand (time(NULL));
 
-    srand (time(NULL));// prime the random number generator
-
+    //Inicializacao do TTF, a lib de renderizacao de texto do SDL.
     if( TTF_Init() < 0 ) puts("TTF nao conseguiu inicializar");
+    //Carregando o arquivo da nossa fonte
     TTF_Font *font = TTF_OpenFont( "7segments.ttf", 40 );
 
-    // pontos
+    // pontuacao dos dois jogadores
     int p1s = 0;
     int p2s = 0;
 
+    // texturas para o placar
     SDL_Texture *p1s_texture = NULL;
     SDL_Rect p1s_dst = (SDL_Rect){ 0.25*width, 10, 0, 0 };
     render_num_text( renderer, p1s, &p1s_texture, &p1s_dst, font );
@@ -108,12 +124,12 @@ int main(int argc, char *argv[]){
     render_num_text( renderer, p2s, &p2s_texture, &p2s_dst, font );
     p2s_dst.x -= p2s_dst.w/2;
 
-    int Z = 2;// queremos mostrar os nossos sprites Z vezer maiores
+    int Z = 2;// escala dos sprites
 
     // informacoes das raquetes
-    int H = Z * 88;
+    int H = Z * 88;//altura
     int hH = H / 2;
-    int W = Z * 16;
+    int W = Z * 16;//largura
     int hW = W / 2;
     // retangulos das raquetes. {x, y, w, h}, (x,y) = canto superior esquerdo
     SDL_Rect P1_rect = (SDL_Rect){ 15, cy-hH, W, H };
@@ -127,6 +143,7 @@ int main(int argc, char *argv[]){
     // raio da bola
     float br = Z * 6.5;
 
+    //inicializacao da velocidade da bola
     double a = 0;
     int coin = random(1, 10);
     if( coin > 5 ) a = randomD( -QUARTER_PI, QUARTER_PI );
@@ -142,9 +159,8 @@ int main(int argc, char *argv[]){
 
 
 
-    
-    puts("<<Entering Loop>>");
-    while ( loop ) { //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> L O O P <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
+    //Inicio do loop de animação
+    while ( loop ) {
         
         SDL_Event event;
         while( SDL_PollEvent(&event) ){
@@ -153,13 +169,13 @@ int main(int argc, char *argv[]){
                     loop = 0;
                     break;
                 
-                case SDL_KEYDOWN:
+                case SDL_KEYDOWN://tecla apertada
                          if( event.key.keysym.sym == 'w' )       p1u = 1;
                     else if( event.key.keysym.sym == 's' )       p1d = 1;
                     else if( event.key.keysym.sym == SDLK_UP )   p2u = 1;
                     else if( event.key.keysym.sym == SDLK_DOWN ) p2d = 1; 
                     break;
-                case SDL_KEYUP:
+                case SDL_KEYUP://tecla solta
                          if( event.key.keysym.sym == 'w' )       p1u = 0;
                     else if( event.key.keysym.sym == 's' )       p1d = 0;
                     else if( event.key.keysym.sym == SDLK_UP )   p2u = 0;
@@ -168,12 +184,9 @@ int main(int argc, char *argv[]){
 
                 case SDL_MOUSEMOTION:
 
-                    //keeping track of current and previous mouse position. Not Mandatory!
-                	pmouseX = mouseX;
-        			pmouseY = mouseY;
                     mouseX = event.motion.x;
                     mouseY = event.motion.y;
-    
+
                     break;
                 case SDL_MOUSEBUTTONDOWN:
                     break;
@@ -185,12 +198,25 @@ int main(int argc, char *argv[]){
             }
         }
 
+        //controles com o mouse para o Player 2:
+        if( abs(mouseY - (P2_rect.y + hH)) > pvel ){
+            if( mouseY < P2_rect.y + hH ) p2u = 1;
+            else p2u = 0;
+            if( mouseY > P2_rect.y + hH ) p2d = 1;
+            else p2d = 0;
+        }
+        else{
+            p2u = 0;
+            p2d = 0;
+        }
+
+        // executar o controle das raquetes
         if( p1u ) P1_rect.y = constrain( P1_rect.y - pvel, 0, height - H );
         if( p1d ) P1_rect.y = constrain( P1_rect.y + pvel, 0, height - H );
         if( p2u ) P2_rect.y = constrain( P2_rect.y - pvel, 0, height - H );
         if( p2d ) P2_rect.y = constrain( P2_rect.y + pvel, 0, height - H );
 
-        // mover a bola.
+        // bola da um passo para frente
         bx += vbx;
         by += vby;
 
@@ -213,6 +239,7 @@ int main(int argc, char *argv[]){
             bx = P2_rect.x -br;
         }
 
+        //colisoes com as paredes verticais, os "gols"
         bool reset_ball = 0;
         if( bx < 0 ){
           ++p2s;
@@ -227,6 +254,7 @@ int main(int argc, char *argv[]){
           reset_ball = 1;
         }
 
+        //se houve um gol, resetamos a bola
         if( reset_ball ){
             bx = cx;
             by = cy;
@@ -256,22 +284,30 @@ int main(int argc, char *argv[]){
         SDL_RenderCopy( renderer, p1s_texture, NULL, &p1s_dst );
         SDL_RenderCopy( renderer, p2s_texture, NULL, &p2s_dst );
         
+        /*
+        //Graficos basicos
         //raquetes
-        //SDL_RenderFillRect( renderer, &P1_rect );
-        //SDL_RenderFillRect( renderer, &P2_rect );
+        SDL_RenderFillRect( renderer, &P1_rect );
+        SDL_RenderFillRect( renderer, &P2_rect );
+        
+        //bola
+        SDL_RenderFillRect( renderer, &(SDL_Rect){bx-br, by-br, 2*br, 2*br} );
+        */
+
+        //Graficos com sprites
+        //raquetes
         SDL_RenderCopy( renderer, sprites, &P1_paddle_src, &P1_rect );
         SDL_RenderCopy( renderer, sprites, &P2_paddle_src, &P2_rect );
         //bola
-        //SDL_RenderFillRect( renderer, &(SDL_Rect){bx-br, by-br, 2*br, 2*br} );
-         SDL_RenderCopyF( renderer, sprites, &ball1_src, &(SDL_FRect){bx-br, by-br, 2*br, 2*br} );
-
+        SDL_RenderCopyF( renderer, sprites, &ball1_src, &(SDL_FRect){bx-br, by-br, 2*br, 2*br} );
 
 
         // Apresentar o quadro para o usuário
         SDL_RenderPresent(renderer);
 
         SDL_framerateDelay( 16 );
-    }//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> / L O O P <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    }
+    // saimos do loop de animacao, o jogo foi fechado.
 
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);

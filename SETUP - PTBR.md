@@ -1,4 +1,4 @@
-Guia rápido para instaler MinGW e SDL para desenvolvimento com C no Windows.
+Guia rápido para instalar MinGW e SDL para desenvolvimento com C no Windows.
 
 # PASSO nº 1 - Instalar MinGW:
 	MinGW, "Minimalist GNU for Windows" é uma suite de ferramentas de desenvolvimento muito tradicional e robusta.
@@ -9,7 +9,7 @@ Guia rápido para instaler MinGW e SDL para desenvolvimento com C no Windows.
 - Execute o arquivo que você acabou de baixar, **mingw-get-setup.exe**
 - clique **install**
 - Pasta de instalação dever ser "C:\MinGW"
-- depois "MinGW Installation Manager Setup Tool" concluir, o "MinGW Installation Manager" vai aparecer, marque os seguintes items na lista para instalá-los:
+- depois que o "MinGW Installation Manager Setup Tool" concluir, o "MinGW Installation Manager" vai aparecer, marque os seguintes items na lista para instalá-los:
 	* mingw32-base-bin
 	* mingw32-binutils-bin
 	* Tudo que disser "The GNU C Compiler" na coluna de descrição.
