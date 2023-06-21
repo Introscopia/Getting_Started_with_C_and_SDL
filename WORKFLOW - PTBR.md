@@ -26,11 +26,11 @@ Nos meus exemplos você vai encontrar:
 
 ONDE EU APRENDO...
 - C
-	-The C Programming Language, 2E, AKA "K&R"
+	-Livro "The C Programming Language 2E", A.K.A. "K&R"
 - AS Bibliotecas padrão do C, "C standard Libraries"
 	-https://legacy.cplusplus.com/reference/clibrary/
 - SDL
-	-https://wiki.libsdl.org/FrontPage
+	-https://wiki.libsdl.org/FrontPage, a wiki esta em manutenção atualmente, é bem crua, mas está tudo lá. o botão de busca é lá em baixo (link "search")
 - Módulos SDL
 	Os próprios headers (arquivos .h) das libs são bem comentados:
 		A da image lib, por exemplo se encontra em:
