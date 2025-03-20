@@ -1,12 +1,12 @@
 Quick guide for setting up MinGW and SDL for C development on windows.
 
-STEP 1 - Download MinGW
+# STEP 1 - Download MinGW
 https://osdn.net/projects/mingw/
 this is the most recent version (as of 2023, since 2017):
 https://osdn.net/projects/mingw/downloads/68260/mingw-get-setup.exe/
 (download will start automatically)
 
-STEP 2 - Run mingw-get-setup.exe
+# STEP 2 - Run mingw-get-setup.exe
 -click install
 -intallation directory should be c:\MinGW
 -after "MinGW Installation Manager Setup Tool" is finished, the "MinGW Installation Manager" will show up, where you should click the checkboxes on:
@@ -17,18 +17,15 @@ STEP 2 - Run mingw-get-setup.exe
 - On the menu at the top, click "Installation", and on the drop-down, "Apply Changes".
 -wait for it to be done and close it.
 
-STEP 3 
-- open up "This PC" on windows explorer.
-- right-click anywhere on the window (like, empty space, the background, not an icon or link or anything)
-- click "Properties"
-(if the previous 3 steps did not make sense to you, somehow, find your way over to the "Control Panel\System and Security\System" screen. or just look for "System Variables" in the taskbar search box.)
-- On the sidebar on the left, click "Advanced system settings"
-- click the button that says "Environment Variables"
+# STEP 3 
+- On the windows taskbar search box type "Environment Variables"
+- Click the thing that says "Edit the system environment variables". It will open a little window,
+- Click the button that says "Environment Variables..."
 - on the lower list, "System variables", find a variable called "Path", select it and click "Edit..."
 - Now on the "Edit environment variable" window, click "New" and add "C:\MinGW\bin" in there. (without the quotes)
 - Done! Now we can compile from the command line. You can try it with the sample project in the 'Compilation Test, no SDL' folder.
 
-STEP 4 - SDL!
+# STEP 4 - SDL!
 - go to https://github.com/libsdl-org/SDL/releases
 - Download the Development Library, for MinGW
 ( link should look like this: SDL2-devel-2.28.2-mingw.zip )
