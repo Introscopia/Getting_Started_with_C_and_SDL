@@ -36,4 +36,5 @@ A pasta que nós queremos em `C:\SDL` no final é algo como `\SDL3-3.2.10\`,
 	- Dica: no navegador de arquivos você pode clicar na barra de endereço, fora dos nomes dos diretórios, o que seleciona o endereço, então você pode copiar com CTRL+C.
 - Agora é só salvar e fechar `#MAKE.bat`, e depois clique duas vezes nele para compilar!
 - Uma janela preta do terminal vai aperecer. 
-  Depois que ela parar de trabalhar, na pasta vai ter surgido o `Pong.exe`
+  Depois que ela terminar de trabalhar, na pasta vai ter surgido o `Pong.exe`
+- Este projeto Pong não só é um exemplo, como pode também ser usado como um template para os seus futuros projetos!
