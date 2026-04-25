@@ -33,8 +33,10 @@ The folder we want in `C:\SDL` at the end should look like `\SDL3-3.2.10\`.
 - Right-click on `#MAKE.bat` and select "Edit."  
 - On the line that says `echo cd "C:\path\to\Pong 64"`,  
   you need to change `"path\to"` to the actual address of your `Pong 64` folder.  
-  - Tip: In the file explorer, you can click on the address bar (outside the directory names) to select the full path, then copy it with `CTRL+C`.  
-- Save and close `#MAKE.bat`, then double-click it to compile!  
+  - Tip: In the file explorer, you can click on the address bar (outside the directory names) to select the full path, then copy it with `CTRL+C`.
+- Save and close `#MAKE.bat`.
+- open the makefile in sublime and check that the paths to the SDL modules are all correct, specifically the version numbers!
+- double-click `#MAKE.bat` in the folder to compile!
 - A black terminal window will appear.  
   Once it's done working, the `Pong.exe` file will appear in the folder.
 - This Pong project is not only an example, but can also be used as a template for your future projects!

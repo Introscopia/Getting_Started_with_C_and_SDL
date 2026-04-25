@@ -34,7 +34,9 @@ A pasta que nós queremos em `C:\SDL` no final é algo como `\SDL3-3.2.10\`,
 - na linha onde esta escrito `echo cd "C:\path\to\Pong 64"`, 
   você tem que mudar o "path\to" para o verdadeiro endereço da sua pasta `Pong 64`.
 	- Dica: no navegador de arquivos você pode clicar na barra de endereço, fora dos nomes dos diretórios, o que seleciona o endereço, então você pode copiar com CTRL+C.
-- Agora é só salvar e fechar `#MAKE.bat`, e depois clique duas vezes nele para compilar!
+- salve e feche `#MAKE.bat`.
+- Abra o makefile no sublime e confira que os endereços dos módulos do SDL estão corretos, especialmente os números de versão!
+- clique duas vezes no `#MAKE.bat` (na pasta) para compilar!
 - Uma janela preta do terminal vai aperecer. 
   Depois que ela terminar de trabalhar, na pasta vai ter surgido o `Pong.exe`
 - Este projeto Pong não só é um exemplo, como pode também ser usado como um template para os seus futuros projetos!
