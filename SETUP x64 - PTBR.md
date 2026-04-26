@@ -5,25 +5,24 @@ Guia rápido para instalar MinGW e SDL para desenvolvimento com C no Windows.
 	é o nosso compilador.
 - Crie uma pasta chamada `W64` no seu diretório `C:`
 - Navegue até https://github.com/skeeto/w64devkit/releases
-- Baixe a versão mais recente, versão x64, sem o .sig. atualmente é: `w64devkit-x64-2.1.0.exe`
+- Baixe a versão mais recente, versão x64, sem o .sig. atualmente é: `w64devkit-x64-2.7.0.7z.exe`
 - Abra sua pasta `C:\W64\`
-- Se o download for um .exe, como a atual v2.1.0, execute-a. Ela vai extrair o devkit, coloque-o aqui mesmo, na pasta W64.
+- Se o download for um .exe, como a atual v2.7.0, execute-a. Ela vai extrair o devkit, coloque-o aqui mesmo, na pasta W64.
 
 # PASSO nº 2 - Instalar o SDL
 - Crie uma pasta chamada "SDL" diretamente no seu drive C:, `C:\SDL`,
 	Na hora de baixar os arquivos seguintes, salve-os nesta pasta.
 - Abra o link: https://github.com/libsdl-org/SDL/releases
 - Baixe o a versão mais recente, pacote de desenvolvimento ("devel") para mingw
-	( Deve ser algo parecido com isso: `SDL3-devel-3.2.10-mingw.tar.gz ` )
+	( Deve ser algo parecido com isso: `SDL3-devel-3.4.4-mingw.tar.gz ` )
 Depois faça o mesmo para os módulos que você for usar, por exemplo:
 * SDL_image: https://github.com/libsdl-org/SDL_image/releases (carregar e salvar imagens)
 * SDL_ttf: https://github.com/libsdl-org/SDL_ttf/releases (renderizar texto a partir de fontes ttf)
-* SDL_net: https://github.com/libsdl-org/SDL_net/releases (rede)
 
 - Extraia os conteudos de todos estes arquivos comprimidos dentro da sua pasta SDL. 
 `REPARE!` que esses arquivos `.tar.gz` tem dois 'níveis' de compressão! 
 Se você só `Extrair Tudo` ou `Extrair Aqui`, você ainda vai ter um arquivo comprimido!
-A pasta que nós queremos em `C:\SDL` no final é algo como `\SDL3-3.2.10\`, 
+A pasta que nós queremos em `C:\SDL` no final é algo como `\SDL3-3.4.4\`, 
 
 # PASSO nº 3 - Testar
 - Baixe o repositório https://github.com/Introscopia/Getting_Started_with_C_and_SDL,
